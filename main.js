@@ -7,53 +7,27 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebas
     messagingSenderId: "801822397489",
     appId: "1:801822397489:web:458dd855de656f49d3b110"
   };
+// main.js
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-
-
-
-
-
-
-
-
-function sendEmail(bookingData) {
-    Email.send({
-      Host: "smtp.elasticemail.com", // Example: smtp.gmail.com//2525
-      Username: "artisticswayam@gmail.com", // Your email address
-      Password: "1703AD2A26834BC8BE76F68A74D806C86C96",     // Your email password or app password
-      To: "artisticswayam@gmail.com",             // The hotel's email address
-      From: "mrs.manaswini.mohanty@gmail.com",     // Sender's email address
-      Subject: "New Booking Confirmation",
-      Body: `A new booking has been made:
-      Name: ${bookingData.name}
-      Email: ${bookingData.email}
-      Phone: ${bookingData.phone}
-      Date: ${bookingData.date}
-      Time: ${bookingData.time}
-      Guests: ${bookingData.guests}`
-    }).then(
-      message => alert("Booking email sent successfully!")
-    );
-  }
+import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDoc,
+        getDocs,
+        doc,
+        setDoc,
+        updateDoc,
+        deleteDoc,
+        onSnapshot,
+        serverTimestamp
+      } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Get elements
+// Form and button
 const form = document.getElementById("bookingForm");
 const commonForm = document.querySelector(".common-form");
 const rentForm = document.querySelector(".rent-form");
@@ -71,40 +45,91 @@ const materialInput = document.getElementById("material");
 const colorInput = document.getElementById("color");
 const sizeInput = document.getElementById("size");
 
-checkBtn.addEventListener("click", () => {
-  // Simple check for empty values
-  if (
-    nameInput.value.trim() === "" ||
-    phoneInput.value.trim() === "" ||
-    categoryInput.value === "" ||
-    materialInput.value === "" ||
-    colorInput.value.trim() === "" ||
-    sizeInput.value === ""
-  ) {
-    availabilityMsg.textContent = "Please fill in all fields correctly.";
-    availabilityMsg.classList.remove("hidden", "text-green");
-    availabilityMsg.classList.add("text-red");
+
+checkBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  
+
+  if (!nameInput.value || !phoneInput.value || !categoryInput.value || !materialInput.value || !colorInput.value || !sizeInput.value) {
+    alert("Fill all fields!");
     return;
   }
 
-  // Fake availability logic
-  availabilityMsg.textContent = "Booking Confirmed! Please notify us via whatsapp";
-  availabilityMsg.classList.remove("hidden", "text-red");
-  availabilityMsg.classList.add("text-green");
-  checkBtn.classList.add("hidden");
-  submitBtn.classList.remove("hidden");
+  const bookingData = {
+    fullName: nameInput.value,
+    phone: phoneInput.value,
+    category: categoryInput.value,
+    material: materialInput.value,
+    color: colorInput.value,
+    size: sizeInput.value,
+    status: "in progress",
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp()
+  };
+
+  try {
+    await addDoc(collection(db,"clients","client1", "bookings"), bookingData);
+    alert("Booking saved successfully!Please notify us via WhatsApp.");
+    statusMsg.textContent = "✅ Booking Confirmed! Please notify us via WhatsApp.";
+    statusMsg.classList.remove("hidden", "text-red");
+    statusMsg.classList.add("text-green");
+    
+    checkBtn.classList.add("hidden");
+    submitBtn.classList.remove("hidden");
+  } catch (err) {
+    alert("Error saving booking:", err);
+    statusMsg.textContent = "❌ Error saving booking!";
+    statusMsg.classList.remove("hidden", "text-green");
+    statusMsg.classList.add("text-red");
+    
+  }
 });
+
+
+submitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const name = nameInput.value.trim();
+  const category = categoryInput.value.trim();
+  const material = materialInput.value.trim();
+  const color = colorInput.value.trim();
+  const size = sizeInput.value.trim();
+  const status = "in progress"; // default
+
+  const message = `
+Hello Kajal,
+I am ${name} and I have provided the details for my booking.
+
+Please give a confirmation.
+`;
+
+  const encodedMessage = encodeURIComponent(message.trim());
+
+  // Hardcoded admin number with country code
+  const adminPhoneNumber = "918954358445";
+  const whatsappURL = `https://wa.me/${adminPhoneNumber}?text=${encodedMessage}`;
+
+  window.open(whatsappURL, '_blank');
+
+  form.reset();
+});
+
+
+// Get elements
+
+
+
 
 form.addEventListener("submit", (e) => {
-  e.preventDefault(); // Prevent actual form submission
+   e.preventDefault(); // Prevent actual form submission
 
-  // Hide availability and show success
-  availabilityMsg.classList.add("hidden");
-  statusMsg.classList.remove("hidden");
+   // Hide availability and show success
+   availabilityMsg.classList.add("hidden");e
+   statusMsg.classList.remove("hidden");
 
-  // You could also reset form fields here if needed:
-  // form.reset();
-});
+   // You could also reset form fields here if needed:
+    form.reset();
+ });
 
 rentBtn.addEventListener("click", () => {
   commonForm.classList.add("hidden");
