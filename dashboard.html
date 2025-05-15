@@ -1,95 +1,170 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-6">
-  <div class="max-w-4xl mx-auto">
-    <h1 class="text-3xl font-bold mb-6">Admin Booking Dashboard</h1>
-    
-    <!-- Bookings Table -->
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Name</th>
-            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Date</th>
-            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Time</th>
-            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Guests</th>
-            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
-            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Action</th>
-          </tr>
-        </thead>
-        <tbody id="bookingList" class="divide-y divide-gray-100">
-          <!-- Bookings will go here -->
-        </tbody>
-      </table>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cloth Booking Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="p-4 sm:p-6" style="background-color: rgb(30, 77, 57);">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-white" style="font-family: 'Apple Garamond', sans-serif;">
+        Clothing Booking Dashboard
+      </h1>
+
+      <!-- Bookings Table -->
+      <div class="w-full overflow-x-auto bg-white shadow-md rounded-lg">
+        <table class="min-w-full text-sm divide-y divide-gray-200">
+          <thead class="bg-gray-200 text-xs sm:text-sm">
+            <tr>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Name</th>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Phone</th>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Category</th>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Material</th>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Color</th>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Size</th>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Status</th>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Action</th>
+            </tr>
+          </thead>
+          <tbody id="bookingList" class="divide-y divide-gray-100 text-xs sm:text-sm">
+            <!-- Bookings will be injected here -->
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <script>
-    // Dummy booking data for now — replace with Firestore later
-    const bookings = [
-      {
-        id: 'b1',
-        name: 'John Doe',
-        date: '2025-05-12',
-        time: '18:00',
-        guests: 3,
-        status: 'pending'
-      },
-      {
-        id: 'b2',
-        name: 'Jane Smith',
-        date: '2025-05-14',
-        time: '20:00',
-        guests: 2,
-        status: 'confirmed'
-      }
-    ];
+    <script type="module">
+      const bookings = [
+      ];
 
-    const bookingList = document.getElementById('bookingList');
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    updateDoc
+  } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
-    function renderBookings() {
-      bookingList.innerHTML = '';
-      bookings.forEach(booking => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td class="px-4 py-2">${booking.name}</td>
-          <td class="px-4 py-2">${booking.date}</td>
-          <td class="px-4 py-2">${booking.time}</td>
-          <td class="px-4 py-2">${booking.guests}</td>
-          <td class="px-4 py-2 font-medium text-${booking.status === 'confirmed' ? 'green' : booking.status === 'cancelled' ? 'red' : 'yellow'}-600">${booking.status}</td>
-          <td class="px-4 py-2">
-            <select class="border border-gray-300 rounded p-1" onchange="updateStatus('${booking.id}', this.value)">
-              <option disabled selected>Update</option>
-              <option value="confirmed">Confirm</option>
-              <option value="cancelled">Cancel</option>
-              <option value="pending">Pending</option>
-            </select>
-          </td>
-        `;
-        bookingList.appendChild(row);
-      });
-    }
+  const firebaseConfig = {
+    apiKey: "AIzaSyC1V5ZxdR2h49petbaK_70zca5HL5tQtck",
+    authDomain: "client-firebase-provider.firebaseapp.com",
+    projectId: "client-firebase-provider",
+    storageBucket: "client-firebase-provider.firebasestorage.app",
+    messagingSenderId: "801822397489",
+    appId: "1:801822397489:web:458dd855de656f49d3b110"
+  };
 
-    function updateStatus(id, newStatus) {
-      const booking = bookings.find(b => b.id === id);
-      if (booking) {
-        booking.status = newStatus;
-        renderBookings();
-        console.log(`Booking ${id} updated to ${newStatus}`);
-        // TODO: Update Firestore using `updateDoc()`
-      }
-    }
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-    renderBookings();
-  </script>
-  <script type="text/javascript" src="https://smtpjs.com/v3/smtp.js"></script>
+  const bookingList = document.getElementById("bookingList");
 
-</body>
+  async function fetchBookings() {
+    const snapshot = await getDocs(collection(db, "clients", "client1", "bookings"));
+    const bookings = [];
+    snapshot.forEach(doc => {
+      bookings.push({ id: doc.id, ...doc.data() });
+    });
+    renderBookings(bookings);
+  }
+window.notifyCustomer = (booking) => {
+  const { fullName, phone, category, material, color, size, status } = booking;
+
+  // Format status with emphasis (emoji + uppercase)
+// Format status with emphasis (emoji + uppercase)
+  // In notifyCustomer function
+let statusText = "";
+if (status === "completed") statusText = "✅ COMPLETED";
+else if (status === "cancelled") statusText = "❌ CANCELLED";
+else statusText = "⏳ IN PROGRESS";  // changed here
+
+const message = `
+Hello ${fullName},
+
+Your clothing booking details:
+
+1. Category: ${category}
+2. Material: ${material}
+3. Color: ${color}
+4. Size: ${size}
+
+Your product is ${statusText}
+${status === "in progress" ? "and you will be notified when it's ready." : "",
+status === "completed"
+      ? "Thank you for booking with us!"
+      : "You can make your changes here!"
+}
+`;
+
+
+  // Encode the message for URL
+  const encodedMessage = encodeURIComponent(message);
+
+  // Use wa.me link to open WhatsApp chat with message
+  // phone number must be in international format without + or 00 (adjust as needed)
+  const phoneNumber = phone.replace(/\D/g, ''); // remove any non-digit chars, adjust if needed for country code
+
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+  // Open WhatsApp link in new tab
+  window.open(whatsappURL, '_blank');
+};
+
+  function renderBookings(bookings) {
+    bookingList.innerHTML = '';
+    bookings.forEach(booking => {
+      const row = document.createElement('tr');
+row.innerHTML = `
+  <td class="px-4 py-2">${booking.fullName}</td>
+  <td class="px-4 py-2">${booking.phone}</td>
+  <td class="px-4 py-2">${booking.category}</td>
+  <td class="px-4 py-2">${booking.material}</td>
+  <td class="px-4 py-2">${booking.color}</td>
+  <td class="px-4 py-2">${booking.size}</td>
+  <td class="px-4 py-2 font-medium text-${getStatusColor(booking.status)}-600">${booking.status}</td>
+  <td class="px-4 py-2 flex gap-2 items-center">
+    <!-- Dropdown in renderBookings -->
+<select class="border border-gray-300 rounded p-1" onchange="updateStatus('${booking.id}', this.value)">
+  <option disabled selected>Update</option>
+  <option value="completed">Complete</option>
+  <option value="cancelled">Cancel</option>
+  <option value="in progress">In Progress</option>  <!-- changed here -->
+</select>
+
+
+    <button 
+      class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
+      onclick='notifyCustomer(${JSON.stringify(booking)})'
+    >
+      Notify
+    </button>
+  </td>
+`;
+
+
+      bookingList.appendChild(row);
+    });
+  }
+
+  // getStatusColor function stays the same since color depends on status value
+function getStatusColor(status) {
+  if (status === "completed") return "green";
+  if (status === "cancelled") return "red";
+  return "yellow"; // "in progress" will default here
+}
+
+  window.updateStatus = async (id, newStatus) => {
+    const bookingRef = doc(db, "clients", "client1", "bookings", id);
+    await updateDoc(bookingRef, {
+      status: newStatus,
+      updatedAt: new Date()
+    });
+    fetchBookings();
+  };
+
+  fetchBookings();
+    </script>
+  </body>
 </html>
