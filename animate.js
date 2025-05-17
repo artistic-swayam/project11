@@ -32,7 +32,7 @@ function showText(){
 }
 
 gsap.from(split.lines, {
-  duration: .8, 
+  duration: 1.2, 
   y: 100,
   rotate: 4,   
       // animate from 100px below
