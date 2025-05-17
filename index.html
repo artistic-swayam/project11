@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Booking Form</title>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 
 </head>
 <body>
-  <p class="c">©copyright 2025 AHARRV</p>
+
   
 
 
@@ -61,135 +64,76 @@
     </div>
 
 
-  <div class="booking">
-  <div class="container">
-    <h2>Get Your Dream Wear</h2>
-  <form id="bookingForm">
-  <div class="main-form">
 
 
-<div class="form-group">
-    <label>Full Name</label>
-    <input type="text" id="name" required />
-  </div>
 
-  <div class="form-group">
-    <label>Phone</label>
-    <input type="tel" id="phone" value="+91 " required />
-  </div>
+
+<div class="home">
+  <header class="header split">
+    <div class="top-bar">
+      <img src="aharrv.jpg" alt="" class="logo">
+      <div class="logo-txt"><r>AHARRV</r></div>
+      <div class="battery">menu</div>
+    </div>
+    <div class="links hidden">
+      
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="intro">
+      <div class="icon"></div>
+      <h1 class="split">
+        <strong>Ahharv</strong> <i>brings your dream outfits to life— </i><strong>custom-made women’s wear</strong><i>that fits your style, your shape, and your</i><strong> attention to detail</strong>.
+      </h1>
+    </section>
+
+    <section class="featured">
+      <div class="about hidden">
+        <h1>At Ahharv, we specialize in custom-crafted lehengas, suits, blouses, and more — made to fit you. Choose your size, color, and fabric — we’ll handle the rest. Whether it’s timeless elegance or bold statements, we bring your unique vision to life, one stitch at a time.</h1>
+      </div>
+      <div class="work-gallery">
+        <img src="m1.png" class="img" alt="Taco Bell App Preview" />
+      </div>
+      
+    </section>
+  </main>
 </div>
-<hr>
-<br>
-<div class="common-form">
-  <div class="form-group">
-    <label>Category</label>
-    <select id="category" required>
-      <option value="">Select Category</option>
-      <option value="Saree">Saree</option>
-      <option value="Suit">Suit</option>
-      <option value="Lehenga">Lehenga</option>
-      <option value="Blouse">Blouse</option>
-      <option value="Dress">Dress</option>
-      <option value="Gown">Gown</option>
-      <option value="Upcycle Saree">Upcycle Saree</option>
-    </select>
-  </div>
 
-  <div class="form-group">
-    <label>Material Type</label>
-    <select id="material" required>
-      <option value="">Select Material</option>
-      <option value="Cotton">Cotton</option>
-      <option value="Silk">Silk</option>
-      <option value="Chiffon">Chiffon</option>
-      <option value="Georgette">Georgette</option>
-      <option value="Net">Net</option>
-    </select>
-  </div>
 
-  <div class="form-group">
-    <label>Color</label>
-    <input type="text" id="color" required placeholder="e.g. Red, Blue, Black" />
-  </div>
 
-  <div class="form-group">
-    <label>Size (in inches)</label>
-    <input type="number" id="size" min="30" max="50" value="38" required />
+
+
+
+<div class="choose">
+  <div class="choose-hero">
+    <h1 class="split-others"><i>Get Your Dream</i> <strong>Wear</strong></h1>
+  </div>
+  <div class="cta">
+    <a href="booking.html"><button class="cta-bt">
+      <i>Custom Wear</i>
+    </button></a>
+    <a href="#"><button class="cta-bt">
+      <i>Selected Wear</i>
+    </button></a>
   </div>
 </div>
 
 
-  
-  <div class="form-group rent  rent-btn">
-    <label>Already have a cloth?</label>
-    <i class="ri-arrow-down-s-line rent-btn"></i>
-  </div>
-  
-  <div class="rent-form hidden">
 
 
-    <div class="form-group">
-    <label>Available Color</label>
-    <input type="text" id="color" required placeholder="e.g. Red, Blue, Black" />
-    <br>
-    <br>
-    <div class="form-group">
-    <label>Available Size (in inches)</label>
-    <input type="number" id="size" min="30" max="50" value="38" required />
-    <br>
-    <br>
-    <div class="form-group">
-    <label>Available Material Type</label>
-    <select id="material" required>
-      <option value="">Select Material</option>
-      <option value="Cotton">Cotton</option>
-      <option value="Silk">Silk</option>
-      <option value="Chiffon">Chiffon</option>
-      <option value="Georgette">Georgette</option>
-      <option value="Net">Net</option>
-    </select>
-    <br>
-    <br>
-    <div class="form-group">
-    <label>Category to make</label>
-    <select id="category" required>
-      <option value="">Select Category</option>
-      <option value="Saree">Saree</option>
-      <option value="Suit">Suit</option>
-      <option value="Lehenga">Lehenga</option>
-      <option value="Blouse">Blouse</option>
-      <option value="Dress">Dress</option>
-      <option value="Gown">Gown</option>
-      <option value="Upcycle Saree">Upcycle Saree</option>
-    </select>
-    
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
 
 
-  <button id="checkBtn" type="button">Confirm Booking</button>
-  <button id="submitBtn" type="submit" class="hidden">Notify Us!</button>
-</form>
 
 
-    <p id="statusMsg" class="text-center text-sm text-green hidden">Booking confirmed!</p>
-    <p id="availabilityMsg" class="text-center text-sm hidden"></p>
-
-    <a href="https://wa.me/918954358445?text=New%20Order%3A%0AName%3A%20Rohan%0AItem%3A%20T-shirt%0ASize%3A%20L%0ADate%3A%20May%2020" target="_blank">
-  Send Order via WhatsApp
-</a>
-
-  </div>
-</div>
   <script>
     
   </script>
+  <script type="module" src="animate.js"></script>
   <script type="module" src="main.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 </body>
 </html>
