@@ -1,14 +1,6 @@
 
 
-gsap.to(".img", {
-      scale: 0.25,
-      scrollTrigger: {
-        start: "top -10%",
-        end: "top -50%",
-        scrub: true,
-        pin: true,
-      }
-    });
+
 // gsap.to(".choose", {
 //   backgroundColor: "rgb(30, 77, 57)",
 //   scrollTrigger: {
@@ -113,13 +105,36 @@ const container = document.getElementById('choose-hero');
   scatterLetters();
 
   // Animate letters to form original line on scroll with fade-in
+
+
+  // Re-scatter letters on resize
+  window.addEventListener('resize', () => {
+    scatterLetters();
+    ScrollTrigger.refresh();
+  });
+
+
+  ScrollTrigger.matchMedia({
+
+  // Desktop (screens wider than 768px)
+  "(min-width: 769px)": function() {
+    gsap.to(".img", {
+      scale: 0.25,
+      scrollTrigger: {
+        start: "top -10%",
+        end: "top -50%",
+        scrub: true,
+        pin: true,
+      }
+    }),
   gsap.to(letters, {
     scrollTrigger: {
 
-      trigger: container,         // Correct element
-    start: 'top bottom',        // Start animating when the line hits bottom of viewport
-    end: 'top center',
+      trigger: letters,         // Correct element
+    start: 'top 20%',        // Start animating when the line hits bottom of viewport
+    end: 'top -50%',
       scrub: 1,
+
     },
     x: 0,
     y: 0,
@@ -128,9 +143,36 @@ const container = document.getElementById('choose-hero');
     stagger: 0.02,
 
   });
+  },
 
-  // Re-scatter letters on resize
-  window.addEventListener('resize', () => {
-    scatterLetters();
-    ScrollTrigger.refresh();
+  // Mobile (screens 768px and below)
+  "(max-width: 768px)": function() {
+    gsap.to(".img", {
+      scale: 0.25,
+      scrollTrigger: {
+        start: "top -10%",
+        end: "top -50%",
+        scrub: true,
+        pin: true,
+        markers: true,
+      }
+    }),
+  gsap.to(letters, {
+    scrollTrigger: {
+
+      trigger: letters,         // Correct element
+    start: 'top 50%',        // Start animating when the line hits bottom of viewport
+    end: 'top -10%',
+      scrub: 1,
+      markers: true,
+    },
+    x: 0,
+    y: 0,
+    opacity: 0.9,
+    ease: 'power2.out',
+    stagger: 0.02,
+
   });
+  },
+
+});
