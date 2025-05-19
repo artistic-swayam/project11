@@ -147,8 +147,8 @@ const container = document.getElementById('choose-hero');
     gsap.to(".img", {
       scale: 0.25,
       scrollTrigger: {
-        start: "top -10%",
-        end: "top -50%",
+        start: "top 10%",
+        end: "top -30%",
         scrub: true,
         pin: true,
 
@@ -161,7 +161,7 @@ const container = document.getElementById('choose-hero');
     start: 'top 150%',        // Start animating when the line hits bottom of viewport
     end: 'top 100%',
       scrub: 1,
-      markers: true,
+
     },
     x: 0,
     y: 0,
