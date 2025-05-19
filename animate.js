@@ -126,12 +126,10 @@ const container = document.getElementById('choose-hero');
     }),
   gsap.to(letters, {
     scrollTrigger: {
-
-      trigger: ".home",         // Correct element
-    start: 'top 30%',        // Start animating when the line hits bottom of viewport
-    end: 'top -40%',
+      trigger: container,         // Correct element
+      start: 'top 130%',        // Start animating when the line hits bottom of viewport
+      end: 'top 50%',
       scrub: 1,
-
     },
     x: 0,
     y: 0,
@@ -147,21 +145,17 @@ const container = document.getElementById('choose-hero');
     gsap.to(".img", {
       scale: 0.25,
       scrollTrigger: {
-        start: "top 10%",
-        end: "top -30%",
+        start: "top 0%",
+        end: "top -10%",
         scrub: true,
-        pin: true,
-
       }
     }),
   gsap.to(letters, {
     scrollTrigger: {
-
       trigger: container,         // Correct element
-    start: 'top 150%',        // Start animating when the line hits bottom of viewport
-    end: 'top 100%',
+      start: 'top 150%',        // Start animating when the line hits bottom of viewport
+      end: 'top 100%',
       scrub: 1,
-
     },
     x: 0,
     y: 0,
