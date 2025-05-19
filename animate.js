@@ -130,9 +130,9 @@ const container = document.getElementById('choose-hero');
   gsap.to(letters, {
     scrollTrigger: {
 
-      trigger: letters,         // Correct element
-    start: 'top 20%',        // Start animating when the line hits bottom of viewport
-    end: 'top -50%',
+      trigger: ".home",         // Correct element
+    start: 'top 30%',        // Start animating when the line hits bottom of viewport
+    end: 'top -40%',
       scrub: 1,
 
     },
@@ -154,15 +154,15 @@ const container = document.getElementById('choose-hero');
         end: "top -50%",
         scrub: true,
         pin: true,
-        markers: true,
+
       }
     }),
   gsap.to(letters, {
     scrollTrigger: {
 
-      trigger: letters,         // Correct element
-    start: 'top 50%',        // Start animating when the line hits bottom of viewport
-    end: 'top -10%',
+      trigger: container,         // Correct element
+    start: 'top 150%',        // Start animating when the line hits bottom of viewport
+    end: 'top 100%',
       scrub: 1,
       markers: true,
     },
