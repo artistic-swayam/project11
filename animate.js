@@ -108,10 +108,7 @@ const container = document.getElementById('choose-hero');
 
 
   // Re-scatter letters on resize
-  window.addEventListener('resize', () => {
-    scatterLetters();
-    ScrollTrigger.refresh();
-  });
+
 
 
   ScrollTrigger.matchMedia({
