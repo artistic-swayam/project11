@@ -498,7 +498,15 @@ i{
     .item-buttons button:hover {
       background: #333;
     }
+    .menu-i{
+      font-size: 2vw;
+    }
 
+
+
+
+
+    
     /* Tablet: 2 per row */
     @media (max-width: 768px) {
       .work-section {
@@ -512,6 +520,9 @@ i{
       .item-img {
         height: 140px;
       }
+      .menu-i{
+      font-size: 5.5vw;
+    }
     }
 
     /* Mobile: 1 per row */
@@ -535,7 +546,7 @@ i{
       margin-bottom: 3rem;
     }
     .intro h1 {
-      font-size: 2rem;
+      font-size: 6vw;
     }
     .links {
       gap: 1rem;
@@ -565,10 +576,7 @@ i{
       font-size: 0.8rem;
       margin-bottom: 0.7rem;
     }
-    .intro h1 {
-      font-size: 1.25rem;
-      line-height: 1.4;
-    }
+
     .links {
       flex-direction: column;
       gap: 0.6rem;
