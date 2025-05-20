@@ -167,3 +167,58 @@ const container = document.getElementById('choose-hero');
   },
 
 });
+const menu_btn = document.querySelector('.menu-i');
+const close_btn = document.querySelector('.close-i');
+const menu = document.querySelector('.menu');
+
+menu_btn.addEventListener('click', () => {
+  menu.classList.toggle('none');
+  close_btn.classList.toggle('none');
+  menu_btn.classList.toggle('none');
+  gsap.fromTo(menu, {
+    opacity: 0,
+    scale: 0,
+  }, {
+    duration: 0.6,
+    opacity: 1,
+    scale: 1,
+    ease: "power4.out"
+  });
+})
+close_btn.addEventListener('click', () => {
+  menu.classList.toggle('none');
+  close_btn.classList.toggle('none');
+  menu_btn.classList.toggle('none');
+})
+
+const links = document.querySelectorAll('.link');
+
+links.forEach(link => {
+  link.addEventListener('mouseenter', () => {
+    // Optional: remove any previous splits
+    const existingSplit = link.querySelector('.split-line');
+    if (existingSplit) return; // prevent repeated splitting
+
+    // Target the <a> inside
+    const target = link.querySelector('a');
+
+    // Split the text into lines
+    const split = new SplitText(target, { type: "lines", linesClass: "split-line" });
+
+    // Animate
+    gsap.from(split.lines, {
+      duration: .8,
+      y: 30,
+      opacity: 0,
+      stagger: 0.1,
+      ease: "power4.out"
+    });
+  });
+
+  // Optional: cleanup on mouse leave
+  link.addEventListener('mouseleave', () => {
+    const target = link.querySelector('a');
+    target.innerHTML = target.textContent; // reset to original
+  });
+});
+
