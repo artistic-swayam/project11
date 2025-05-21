@@ -91,7 +91,7 @@ const container = document.getElementById('choose-hero');
 
     letters.forEach(letter => {
       // Scatter anywhere in viewport width and 2x viewport height (full scroll height)
-      const randomX = Math.random() * vw - container.getBoundingClientRect().left;
+      const randomX = Math.random() * vw - container.getBoundingClientRect().right;
       const randomY = Math.random() * vh * 2 - container.getBoundingClientRect().top;
 
       gsap.set(letter, {
@@ -221,4 +221,142 @@ links.forEach(link => {
     target.innerHTML = target.textContent; // reset to original
   });
 });
+
+const prevcasual = document.querySelector('.prev-casual');
+const prevwestern = document.querySelector('.prev-western');
+const prevethnic = document.querySelector('.prev-ethnic');
+
+
+const nextcasual = document.querySelector('.next-casual');
+const nextwestern = document.querySelector('.next-western');
+const nextethnic = document.querySelector('.next-ethnic');
+
+
+const casual = document.querySelector('.casual');
+const ethnic = document.querySelector('.ethnic');
+const western = document.querySelector('.western');
+
+
+
+prevcasual.addEventListener('click', () => {
+
+  gsap.to(casual, {
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.out",
+    onComplete: () => {
+      casual.classList.add('none');
+      ethnic.classList.remove('none');
+      // Then fade in ethnic
+      gsap.fromTo(ethnic, 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
+      );
+    }
+  });
+});
+prevethnic.addEventListener('click', () => {
+
+  gsap.to(ethnic, {
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.out",
+    onComplete: () => {
+      ethnic.classList.add('none');
+      western.classList.remove('none');
+      // Then fade in ethnic
+      gsap.fromTo(western, 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
+      );
+    }
+  });
+});
+prevwestern.addEventListener('click', () => {
+
+  gsap.to(western, {
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.out",
+    onComplete: () => {
+      western.classList.add('none');
+      casual.classList.remove('none');
+      // Then fade in ethnic
+      gsap.fromTo(casual, 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
+      );
+    }
+  });
+});
+
+
+
+
+
+
+
+
+nextcasual.addEventListener('click', () => {
+
+  gsap.to(casual, {
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.out",
+    onComplete: () => {
+      casual.classList.add('none');
+      western.classList.remove('none');
+      // Then fade in ethnic
+      gsap.fromTo(western, 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
+      );
+    }
+  });
+});
+nextethnic.addEventListener('click', () => {
+
+  gsap.to(ethnic, {
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.out",
+    onComplete: () => {
+      ethnic.classList.add('none');
+      casual.classList.remove('none');
+      // Then fade in ethnic
+      gsap.fromTo(casual, 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
+      );
+    }
+  });
+});
+nextwestern.addEventListener('click', () => {
+
+  gsap.to(western, {
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.out",
+    onComplete: () => {
+      western.classList.add('none');
+      ethnic.classList.remove('none');
+      // Then fade in ethnic
+      gsap.fromTo(ethnic, 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
+      );
+    }
+  });
+});
+
+document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+
+    
+
+
+
 
