@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Booking Form</title>
+  <title>AHARRV</title>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,7 +117,7 @@
         <h1>At Ahharv, we specialize in custom-crafted lehengas, suits, blouses, and more — made to fit you. Choose your size, color, and fabric — we’ll handle the rest. Whether it’s timeless elegance or bold statements, we bring your unique vision to life, one stitch at a time.</h1>
       </div>
       <div class="work-gallery">
-        <img src="1st.png" class="img" alt="" />
+        <img src="main.jpg" class="img" alt="Taco Bell App Preview" />
       </div>
       
     </section>
@@ -157,13 +157,23 @@
 
 
 
-  <div class="work-section">
-    <h1 class="work-hero"><i>Available Designs</i></h1>
+  <div class="work-section casual none">
+    
+    <h1 class="work-hero"><i>Casual Wear</i></h1>
+    <div class="status">
+      <h4 class="">Ethnic</h4>
+      <h4 class="current">Casual</h4>
+      <h4 class="">Western</h4>
+    </div>
+    <div class="nav-buttons">
+      <button class="prev-casual">Prev</button>
+      <button class="next-casual" onclick="nextSlide()">Next</button>
+    </div>
     <div class="item-card">
-      <img src="https://via.placeholder.com/300x150" alt="Wear 1" class="item-img" />
+      <img src="casuals/cotto printed suits @1200.jpg" alt="Wear 1" class="item-img" />
       <div class="item-info">
-        <div class="item-name"><strong>Classic Hoodie</strong></div>
-        <div class="item-details">Soft, premium cotton for all-day comfort.</div>
+        <div class="item-name"><strong>cotto printed <p class="type">Suit</p></strong></div>
+        <div class="item-details">₹1200</div>
         <div class="item-buttons">
           <button class="btn">
             <span><i>Book</i></span>
@@ -178,10 +188,10 @@
     </div>
 
     <div class="item-card">
-      <img src="https://via.placeholder.com/300x150" alt="Wear 2" class="item-img" />
+      <img src="casuals/Farsi set @ 500.jpg" alt="Wear 2" class="item-img" />
       <div class="item-info">
-        <div class="item-name">Urban Jacket</div>
-        <div class="item-details">Windproof & stylish for your city moves.</div>
+        <div class="item-name">Farsi set</div>
+        <div class="item-details">₹500</div>
         <div class="item-buttons">
           <button class="btn">
             <span><i>Book</i></span>
@@ -196,10 +206,10 @@
     </div>
 
     <div class="item-card">
-      <img src="https://via.placeholder.com/300x150" alt="Wear 3" class="item-img" />
+      <img src="casuals/knee length dress @ 450.jpg" alt="Wear 3" class="item-img" />
       <div class="item-info">
-        <div class="item-name">Streetwear Tee</div>
-        <div class="item-details">Loose fit & bold print, Gen Z approved.</div>
+        <div class="item-name">Knee length <p class="type">Dress</p></div>
+        <div class="item-details">₹450</div>
         <div class="item-buttons">
           <button class="btn">
             <span><i>Book</i></span>
@@ -214,10 +224,10 @@
     </div>
 
     <div class="item-card">
-      <img src="https://via.placeholder.com/300x150" alt="Wear 4" class="item-img" />
+      <img src="casuals/padded strap dress @ 800.jpg" alt="Wear 4" class="item-img" />
       <div class="item-info">
-        <div class="item-name">Athleisure Set</div>
-        <div class="item-details">Loose fit & bold print, Gen Z approved.</div>
+        <div class="item-name">Paded strap <p class="type">Dress</p></div>
+        <div class="item-details">₹800</div>
         <div class="item-buttons">
           <button class="btn">
             <span><i>Book</i></span>
@@ -232,10 +242,10 @@
     </div>
 
     <div class="item-card">
-      <img src="https://via.placeholder.com/300x150" alt="Wear 5" class="item-img" />
+      <img src="casuals/pleated frock @ 450.jpg" alt="Wear 5" class="item-img" />
       <div class="item-info">
-        <div class="item-name">Denim Fit</div>
-        <div class="item-details">Slim fit stretch denim for comfort.</div>
+        <div class="item-name">Pleated <p class="type">Frock</p></div>
+        <div class="item-details">₹450</div>
         <div class="item-buttons">
           <button class="btn">
             <span><i>Book</i></span>
@@ -250,10 +260,49 @@
     </div>
 
     <div class="item-card">
-      <img src="https://via.placeholder.com/300x150" alt="Wear 6" class="item-img" />
+      <img src="casuals/tiered skirt @ 500.jpg" alt="Wear 6" class="item-img" />
       <div class="item-info">
-        <div class="item-name">Cozy Puffer</div>
-        <div class="item-details">Warmth locked in, chill vibes out.</div>
+        <div class="item-name">Tiered <p class="type">Skirt</p></div>
+        <div class="item-details">₹500</div>
+        <div class="item-buttons">
+          <a href="booking.html">
+          <button class="btn">
+            <span><i>Book</i></span>
+            <div class="hover-circle"></div>
+          </button>
+          <button class="btn">
+            <span><i>Enquire</i></span>
+            <div class="hover-circle"></div>
+          </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+
+
+
+
+
+  <div class="work-section ethnic">
+    
+    <h1 class="work-hero"><i>Ethnic Wear</i></h1>
+    <div class="status">
+      <h4 class="current">Ethnic</h4>
+      <h4 class="">Casual</h4>
+      <h4 class="">Western</h4>
+    </div>
+    <div class="nav-buttons">
+      <button class="prev-ethnic">Prev</button>
+      <button class="next-ethnic">Next</button>
+    </div>
+    <div class="item-card">
+      <img src="ethnic/black suit @ 1500.jpg" alt="Wear 1" class="item-img" />
+      <div class="item-info">
+        <div class="item-name"><strong>Black <p class="type">Suit</p></strong></div>
+        <div class="item-details">₹1500</div>
         <div class="item-buttons">
           <button class="btn">
             <span><i>Book</i></span>
@@ -268,10 +317,10 @@
     </div>
 
     <div class="item-card">
-      <img src="https://via.placeholder.com/300x150" alt="Wear 7" class="item-img" />
+      <img src="ethnic/box pleated lehenga @ 2200.jpg" alt="Wear 2" class="item-img" />
       <div class="item-info">
-        <div class="item-name">Retro Windbreaker</div>
-        <div class="item-details">Bold colors, vintage vibes.</div>
+        <div class="item-name">Box Pleated <p class="type">Lehenga</p></div>
+        <div class="item-details">₹2200</div>
         <div class="item-buttons">
           <button class="btn">
             <span><i>Book</i></span>
@@ -286,10 +335,100 @@
     </div>
 
     <div class="item-card">
-      <img src="https://via.placeholder.com/300x150" alt="Wear 8" class="item-img" />
+      <img src="ethnic/Kalidar lehenga @ 3500.jpg" alt="Wear 3" class="item-img" />
       <div class="item-info">
-        <div class="item-name">Summer Shorts</div>
-        <div class="item-details">Lightweight and breathable.</div>
+        <div class="item-name">Kalidar <p class="type">Lehenga</p> 1</div>
+        <div class="item-details">₹3500</div>
+        <div class="item-buttons">
+          <button class="btn">
+            <span><i>Book</i></span>
+            <div class="hover-circle"></div>
+          </button>
+          <button class="btn">
+            <span><i>Enquire</i></span>
+            <div class="hover-circle"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img src="ethnic/Kalidar lehenga@3500.jpg" alt="Wear 4" class="item-img" />
+      <div class="item-info">
+        <div class="item-name">Kalidar <p class="type">Lehenga</p> 2</div>
+        <div class="item-details">₹3500</div>
+        <div class="item-buttons">
+          <button class="btn">
+            <span><i>Book</i></span>
+            <div class="hover-circle"></div>
+          </button>
+          <button class="btn">
+            <span><i>Enquire</i></span>
+            <div class="hover-circle"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img src="ethnic/Kalidar suit @ 2000.jpg" alt="Wear 5" class="item-img" />
+      <div class="item-info">
+        <div class="item-name">Kalidar <p class="type">Suit</p></div>
+        <div class="item-details">₹2000</div>
+        <div class="item-buttons">
+          <button class="btn">
+            <span><i>Book</i></span>
+            <div class="hover-circle"></div>
+          </button>
+          <button class="btn">
+            <span><i>Enquire</i></span>
+            <div class="hover-circle"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img src="ethnic/Kalidarlehenga@3500.jpg" alt="Wear 6" class="item-img" />
+      <div class="item-info">
+        <div class="item-name">Kalidar <p class="type">Lehenga</p></div>
+        <div class="item-details">₹3500</div>
+        <div class="item-buttons">
+          <button class="btn">
+            <span><i>Book</i></span>
+            <div class="hover-circle"></div>
+          </button>
+          <button class="btn">
+            <span><i>Enquire</i></span>
+            <div class="hover-circle"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img src="ethnic/kids suit @ 300.jpg" alt="Wear 7" class="item-img" />
+      <div class="item-info">
+        <div class="item-name">Kids <p class="type">Suit</p> 1</div>
+        <div class="item-details">₹300</div>
+        <div class="item-buttons">
+          <button class="btn">
+            <span><i>Book</i></span>
+            <div class="hover-circle"></div>
+          </button>
+          <button class="btn">
+            <span><i>Enquire</i></span>
+            <div class="hover-circle"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img src="ethnic/kids suit.jpg" alt="Wear 8" class="item-img" />
+      <div class="item-info">
+        <div class="item-name">Kids <p class="type">Suit</p> 2</div>
+        <div class="item-details">₹300</div>
         <div class="item-buttons">
           <button class="btn">
             <span><i>Book</i></span>
@@ -305,6 +444,125 @@
   </div>
 
 
+
+
+  <div class="work-section none western">
+    <h1 class="work-hero"><i>Western Wear</i></h1>
+    <div class="status">
+      <h4 class="">Ethnic</h4>
+      <h4 class="">Casual</h4>
+      <h4 class="current">Western</h4>
+    </div>
+    <div class="nav-buttons">
+      <button class="prev-western">Prev</button>
+      <button class="next-western">Next</button>
+    </div>
+    <div class="item-card">
+      <img src="western/Embroidered gown @ 2500.jpg" alt="Wear 1" class="item-img" />
+      <div class="item-info">
+        <div class="item-name"><strong>Embroidered <p class="type">Gown</p></strong></div>
+        <div class="item-details">₹2500</div>
+        <div class="item-buttons">
+          <button class="btn">
+            <span><i>Book</i></span>
+            <div class="hover-circle"></div>
+          </button>
+          <button class="btn">
+            <span><i>Enquire</i></span>
+            <div class="hover-circle"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img src="western/Printed Gown @ 2500.jpg" alt="Wear 2" class="item-img" />
+      <div class="item-info">
+        <div class="item-name">Printed <p class="type">Gown</p></div>
+        <div class="item-details">₹2500</div>
+        <div class="item-buttons">
+
+          <button class="btn">
+            <span><i>Book</i></span>
+            <div class="hover-circle"></div>
+          </button>
+
+
+          <button class="btn">
+            <span><i>Enquire</i></span>
+            <div class="hover-circle"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <div class="faq-section none">
+    <h2 class="faq-title"><i>Frequently Asked Question</i></h2>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        How Does TIC Global Services Work?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        TIC Global Services follows a structured approach starting from client discovery to final delivery. We handle the process professionally with clarity.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        What Services do TIC Global Services Offer?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        We offer web development, design, branding, content, and consulting services tailored for global clients.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        What's the average project duration in TIC Global Services?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Most projects take between 2 to 6 weeks depending on complexity and client feedback response time.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        Is an advance payment required before starting a project?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Yes, we require a 50% advance to secure your slot and begin work.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        Do you offer refunds?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Refunds are considered on a case-by-case basis and depend on project stage and agreements.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">
+        What happens if I miss a payment deadline?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Delays in payment may result in paused work or postponed delivery dates.
+      </div>
+    </div>
+
+  </div>
 
 
 
