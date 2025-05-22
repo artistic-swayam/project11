@@ -186,3 +186,32 @@ gsap.to(".clip-top .marque,.clip-bottom .marque,.clip-center .marque span",1,{
     opacity:0,
     ease:"power2.inOut"
 })
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const categorySelect = document.getElementById("category");
+  const productDetailsInput = document.getElementById("details");
+  const materialField = document.querySelector(".material");
+
+  const savedType = localStorage.getItem("selectedType");
+  const savedProductNo = localStorage.getItem("selectedProductNo");
+
+  if (savedType && categorySelect) {
+    categorySelect.value = savedType;
+    localStorage.removeItem("selectedType");
+  }
+
+  if (savedProductNo && productDetailsInput) {
+    productDetailsInput.value = `Product No. ${savedProductNo}`;
+    productDetailsInput.classList.remove("hidden"); // Remove hidden from #details
+
+    if (materialField) {
+      materialField.classList.add("hidden"); // Add hidden to .material
+    }
+
+    localStorage.removeItem("selectedProductNo");
+  }
+});
+
+
