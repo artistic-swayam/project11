@@ -423,8 +423,7 @@ i{
       overflow: hidden;
       box-shadow: 0 10px 20px rgba(0,0,0,0.08);
       display: flex;
-      flex-direction: column;
-      height: 90%; /* slightly reduced */
+      flex-direction: column; 
       transition: transform 0.2s ease;
       font-family: var(--2nd-font);
       width: 15vw; /* 4 per row on PC */
@@ -647,7 +646,7 @@ i{
       opacity: 1;
     }
     .type{
-      display: inline;
+
     }
 
 
@@ -662,7 +661,6 @@ i{
       }
       .item-card {
         width: calc(50% - 10px);
-        height: 95%;
       }
       .item-img {
         height: 50%;
@@ -738,6 +736,9 @@ i{
     }
     .nav-buttons button {
       height: 5vh;
+    }
+    .item-buttons{
+      flex-direction: column;
     }
   }
 
