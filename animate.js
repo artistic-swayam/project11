@@ -154,8 +154,9 @@ const container = document.getElementById('choose-hero');
     scrollTrigger: {
       trigger: container,         // Correct element
       start: 'top 150%',        // Start animating when the line hits bottom of viewport
-      end: 'top 100%',
+      end: 'top 50%',
       scrub: 1,
+
     },
     x: 0,
     y: 0,
@@ -360,3 +361,23 @@ document.querySelectorAll('.faq-item').forEach(item => {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const bookButtons = document.querySelectorAll(".item-card .btn");
+
+    bookButtons.forEach((button) => {
+      const label = button.innerText.trim().toLowerCase();
+
+      if (label === "book") {
+        button.addEventListener("click", () => {
+          const itemCard = button.closest(".item-card");
+          const type = itemCard.querySelector(".type")?.innerText?.trim();
+          const productNo = itemCard.querySelector(".product-no")?.innerText?.trim();
+
+          if (type) localStorage.setItem("selectedType", type);
+          if (productNo) localStorage.setItem("selectedProductNo", productNo);
+
+          window.location.href = "booking.html";
+        });
+      }
+    });
+  });
