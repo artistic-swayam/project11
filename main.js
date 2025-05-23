@@ -44,16 +44,18 @@ const categoryInput = document.getElementById("category");
 const materialInput = document.getElementById("material");
 const colorInput = document.getElementById("color");
 const sizeInput = document.getElementById("size");
+const productDetailsInput = document.getElementById("details");
 
 
 checkBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   
 
-  if (!nameInput.value || !phoneInput.value || !categoryInput.value || !materialInput.value || !colorInput.value || !sizeInput.value) {
+  if (!nameInput.value || !phoneInput.value || !categoryInput.value ||  !sizeInput.value) {
     alert("Fill all fields!");
     return;
   }
+
 
   const bookingData = {
     fullName: nameInput.value,
@@ -62,6 +64,7 @@ checkBtn.addEventListener("click", async (e) => {
     material: materialInput.value,
     color: colorInput.value,
     size: sizeInput.value,
+    productDetails: productDetailsInput.value,
     status: "in progress",
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp()
@@ -94,10 +97,11 @@ submitBtn.addEventListener("click", (e) => {
   const material = materialInput.value.trim();
   const color = colorInput.value.trim();
   const size = sizeInput.value.trim();
+  const productDetails = productDetailsInput.value.trim();
   const status = "in progress"; // default
 
   const message = `
-Hello Kajal,
+Hello Aharrv,
 I am ${name} and I have provided the details for my booking.
 
 Please give a confirmation.
@@ -106,7 +110,7 @@ Please give a confirmation.
   const encodedMessage = encodeURIComponent(message.trim());
 
   // Hardcoded admin number with country code
-  const adminPhoneNumber = "918954358445";
+  const adminPhoneNumber = "919557699153";
   const whatsappURL = `https://wa.me/${adminPhoneNumber}?text=${encodedMessage}`;
 
   window.open(whatsappURL, '_blank');
@@ -193,6 +197,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const categorySelect = document.getElementById("category");
   const productDetailsInput = document.getElementById("details");
   const materialField = document.querySelector(".material");
+  const colorField = document.querySelector(".color");
+  const rentField = document.querySelector(".rent");
 
   const savedType = localStorage.getItem("selectedType");
   const savedProductNo = localStorage.getItem("selectedProductNo");
@@ -202,6 +208,8 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("selectedType");
   }
 
+
+
   if (savedProductNo && productDetailsInput) {
     productDetailsInput.value = `Product No. ${savedProductNo}`;
     productDetailsInput.classList.remove("hidden"); // Remove hidden from #details
@@ -209,8 +217,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (materialField) {
       materialField.classList.add("hidden"); // Add hidden to .material
     }
-
+    if (colorField) {
+      colorField.classList.add("hidden"); // Add hidden to .color
+    }
+    if (rentField) {
+      rentField.classList.add("hidden"); // Add hidden to .rent
+    }
+    
     localStorage.removeItem("selectedProductNo");
+
   }
 });
 
