@@ -23,6 +23,8 @@
               <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Material</th>
               <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Color</th>
               <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Size</th>
+              <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Details</th>
+
               <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Status</th>
               <th class="px-3 sm:px-4 py-2 text-left font-semibold text-gray-700">Action</th>
             </tr>
@@ -70,7 +72,7 @@
     renderBookings(bookings);
   }
 window.notifyCustomer = (booking) => {
-  const { fullName, phone, category, material, color, size, status } = booking;
+  const { fullName, phone, category, material, color, size, productDetails, status } = booking;
 
   // Format status with emphasis (emoji + uppercase)
 // Format status with emphasis (emoji + uppercase)
@@ -89,6 +91,7 @@ Your clothing booking details:
 2. Material: ${material}
 3. Color: ${color}
 4. Size: ${size}
+5. Details: ${productDetails || "N/A"}
 
 Your product is ${statusText}
 ${status === "in progress" ? "and you will be notified when it's ready." : "",
@@ -119,10 +122,11 @@ status === "completed"
 row.innerHTML = `
   <td class="px-4 py-2">${booking.fullName}</td>
   <td class="px-4 py-2">${booking.phone}</td>
-  <td class="px-4 py-2">${booking.category}</td>
-  <td class="px-4 py-2">${booking.material}</td>
-  <td class="px-4 py-2">${booking.color}</td>
-  <td class="px-4 py-2">${booking.size}</td>
+  <td class="px-4 py-2">${booking.category || "—"}</td>
+  <td class="px-4 py-2">${booking.material || "—"}</td>
+  <td class="px-4 py-2">${booking.color || "—"}</td>
+  <td class="px-4 py-2">${booking.size || "—"}</td>
+  <td class="px-4 py-2">${booking.productDetails || "—"}</td>
   <td class="px-4 py-2 font-medium text-${getStatusColor(booking.status)}-600">${booking.status}</td>
   <td class="px-4 py-2 flex gap-2 items-center">
     <!-- Dropdown in renderBookings -->
