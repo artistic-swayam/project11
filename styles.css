@@ -222,7 +222,7 @@
     background-color: #000;
     background-blend-mode: screen, normal;
     color: white;
-    height: 130vh;
+    height: 160vh;
     width: 100vw;
 }
 .choose {
@@ -663,7 +663,7 @@ i{
           display: flex;
     color: black;
     width: 100%;
-    justify-content: space-evenly;
+    gap: 15px;
     }
     .contact-hero{
           width: 100%;
@@ -711,7 +711,25 @@ i{
 .c-socials{
       color: whitesmoke;
     }
-    
+    .watermark {
+  font-size: 10px;
+  font-family: var(--2nd-font);
+  text-align: left;
+  color: #aaa;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
+  margin: 0 10px;
+}
+.watermark a {
+  color: #aaa;
+  text-decoration: none;
+}
+.watermark a:hover {
+  text-decoration: underline;
+}
+
+
 /* .c-type {
     z-index: 100;
     text-align: center;
