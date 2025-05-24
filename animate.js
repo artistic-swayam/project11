@@ -1,388 +1,232 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyC1V5ZxdR2h49petbaK_70zca5HL5tQtck",
+    authDomain: "client-firebase-provider.firebaseapp.com",
+    projectId: "client-firebase-provider",
+    storageBucket: "client-firebase-provider.firebasestorage.app",
+    messagingSenderId: "801822397489",
+    appId: "1:801822397489:web:458dd855de656f49d3b110"
+  };
+// main.js
+
+import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDoc,
+        getDocs,
+        doc,
+        setDoc,
+        updateDoc,
+        deleteDoc,
+        onSnapshot,
+        serverTimestamp
+      } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// gsap.to(".choose", {
-//   backgroundColor: "rgb(30, 77, 57)",
-//   scrollTrigger: {
-//     trigger: ".choose",          // use the actual section, not body
-//     start: "top center",         // when .choose top hits center of viewport
-//     end: "bottom center",        // when .choose bottom hits center
-//     toggleActions: "play reverse play reverse",             // for debugging
-//   }
-// });
-const lenis = new Lenis({})
-function raf(time) {
-    lenis.raf(time)
-    requestAnimationFrame(raf)
-}
-requestAnimationFrame(raf)
-gsap.registerPlugin(SplitText) 
-let split = SplitText.create(".split", {
-  type: "words, lines", 
-  mask: "lines",
-  linesClass: "line++", 
+// Form and button
+const form = document.getElementById("bookingForm");
+const commonForm = document.querySelector(".common-form");
+const rentForm = document.querySelector(".rent-form");
+const rentBtn = document.querySelector(".rent-btn");
+const checkBtn = document.getElementById("checkBtn");
+const submitBtn = document.getElementById("submitBtn");
+const statusMsg = document.getElementById("statusMsg");
+const availabilityMsg = document.getElementById("availabilityMsg");
 
-});
+// Form fields
+const nameInput = document.getElementById("name");
+const phoneInput = document.getElementById("phone");
+const categoryInput = document.getElementById("category");
+const materialInput = document.getElementById("material");
+const colorInput = document.getElementById("color");
+const sizeInput = document.getElementById("size");
+const productDetailsInput = document.getElementById("details");
+
+
+checkBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
   
-function showText(){
 
-}
-
-gsap.from(split.lines, {
-  duration: 1.2, 
-  y: 100,
-  rotate: 4,   
-      // animate from 100px below
-  opacity: 0,   // fade in from opacity: 0 and visibility: hidden
-  stagger: 0.1,
-    // 0.05 seconds between each
-});
-let split_others = SplitText.create(".split-others", {
-  type: "words, lines", 
-  mask: "lines",
-  linesClass: "line++", 
-
-});
-gsap.from(split_others.lines, {
-  duration: .8,
-  y: 100,
-  rotate: 4,
-  opacity: 0,
-  stagger: 0.1,
-  scrollTrigger: {
-    trigger: ".split-others",
-    start: "top 80%",
-    toggleActions: "play reverse play reverse",
-    // for debugging
-  }
-});
-const buttons = document.querySelectorAll('.btn');
-
-buttons.forEach(btn => {
-  const hoverCircle = btn.querySelector('.hover-circle');
-
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    hoverCircle.style.left = `${x - 50}px`;
-    hoverCircle.style.top = `${y - 50}px`;
-    hoverCircle.style.transformOrigin = `50% 50%`;
-  });
-
-  btn.addEventListener('mouseleave', () => {
-    hoverCircle.style.transformOrigin = `center center`;
-  });
-});
-
-
-const container = document.getElementById('choose-hero');
-  const originalText = container.textContent;
-  container.textContent = ''; // clear container to inject letters
-
-  // Wrap every letter including spaces into a span
-  const letters = [...originalText].map(char => {
-    const span = document.createElement('span');
-    span.classList.add('letter');
-    span.textContent = char;
-    container.appendChild(span);
-    return span;
-  });
-
-  function scatterLetters() {
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    letters.forEach(letter => {
-      // Scatter anywhere in viewport width and 2x viewport height (full scroll height)
-      const randomX = Math.random() * vw - container.getBoundingClientRect().right;
-      const randomY = Math.random() * vh * 2 - container.getBoundingClientRect().top;
-
-      gsap.set(letter, {
-        x: randomX,
-        y: randomY,
-        opacity: 0,    // start hidden
-      });
-    });
+  if (!nameInput.value || !phoneInput.value || !categoryInput.value ||  !sizeInput.value) {
+    alert("Fill all fields!");
+    return;
   }
 
-  scatterLetters();
 
-  // Animate letters to form original line on scroll with fade-in
+  const bookingData = {
+    fullName: nameInput.value,
+    phone: phoneInput.value,
+    category: categoryInput.value,
+    material: materialInput.value,
+    color: colorInput.value,
+    size: sizeInput.value,
+    productDetails: productDetailsInput.value,
+    status: "in progress",
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp()
+  };
 
-
-  // Re-scatter letters on resize
-
-
-
-  ScrollTrigger.matchMedia({
-
-  // Desktop (screens wider than 768px)
-  "(min-width: 769px)": function() {
-    // gsap.to(".img", {
-    //   scale: 0.25,
-    //   scrollTrigger: {
-    //     start: "top -10%",
-    //     end: "top -50%",
-    //     scrub: true,
-    //     pin: true,
-    //   }
-    // }),
-  gsap.to(letters, {
-    scrollTrigger: {
-      trigger: container,         // Correct element
-      start: 'top 130%',        // Start animating when the line hits bottom of viewport
-      end: 'top 50%',
-      scrub: 1,
-    },
-    x: 0,
-    y: 0,
-    opacity: 0.9,
-    ease: 'power2.out',
-    stagger: 0.02,
-
-  });
-  },
-
-  // Mobile (screens 768px and below)
-  "(max-width: 768px)": function() {
-    // gsap.to(".img", {
-    //   scale: 0.25,
-    //   scrollTrigger: {
-    //     start: "top 0%",
-    //     end: "top -10%",
-    //     scrub: true,
-    //   }
-    // }),
-  gsap.to(letters, {
-    scrollTrigger: {
-      trigger: container,         // Correct element
-      start: 'top 150%',        // Start animating when the line hits bottom of viewport
-      end: 'top 50%',
-      scrub: 1,
-
-    },
-    x: 0,
-    y: 0,
-    opacity: 0.9,
-    ease: 'power2.out',
-    stagger: 0.02,
-
-  });
-  },
-
-});
-const menu_btn = document.querySelector('.menu-i');
-const close_btn = document.querySelector('.close-i');
-const menu = document.querySelector('.menu');
-
-menu_btn.addEventListener('click', () => {
-  menu.classList.toggle('none');
-  close_btn.classList.toggle('none');
-  menu_btn.classList.toggle('none');
-  gsap.fromTo(menu, {
-    opacity: 0,
-    scale: 0,
-  }, {
-    duration: 0.6,
-    opacity: 1,
-    scale: 1,
-    ease: "power4.out"
-  });
-})
-close_btn.addEventListener('click', () => {
-  menu.classList.toggle('none');
-  close_btn.classList.toggle('none');
-  menu_btn.classList.toggle('none');
-})
-
-const links = document.querySelectorAll('.link');
-
-links.forEach(link => {
-  link.addEventListener('mouseenter', () => {
-    // Optional: remove any previous splits
-    const existingSplit = link.querySelector('.split-line');
-    if (existingSplit) return; // prevent repeated splitting
-
-    // Target the <a> inside
-    const target = link.querySelector('a');
-
-    // Split the text into lines
-    const split = new SplitText(target, { type: "lines", linesClass: "split-line" });
-
-    // Animate
-    gsap.from(split.lines, {
-      duration: .8,
-      y: 30,
-      opacity: 0,
-      stagger: 0.1,
-      ease: "power4.out"
-    });
-  });
-
-  // Optional: cleanup on mouse leave
-  link.addEventListener('mouseleave', () => {
-    const target = link.querySelector('a');
-    target.innerHTML = target.textContent; // reset to original
-  });
-});
-
-const prevcasual = document.querySelector('.prev-casual');
-const prevwestern = document.querySelector('.prev-western');
-const prevethnic = document.querySelector('.prev-ethnic');
-
-
-const nextcasual = document.querySelector('.next-casual');
-const nextwestern = document.querySelector('.next-western');
-const nextethnic = document.querySelector('.next-ethnic');
-
-
-const casual = document.querySelector('.casual');
-const ethnic = document.querySelector('.ethnic');
-const western = document.querySelector('.western');
-
-
-
-prevcasual.addEventListener('click', () => {
-
-  gsap.to(casual, {
-    opacity: 0,
-    duration: 0.5,
-    ease: "power2.out",
-    onComplete: () => {
-      casual.classList.add('none');
-      ethnic.classList.remove('none');
-      // Then fade in ethnic
-      gsap.fromTo(ethnic, 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
-      );
-    }
-  });
-});
-prevethnic.addEventListener('click', () => {
-
-  gsap.to(ethnic, {
-    opacity: 0,
-    duration: 0.5,
-    ease: "power2.out",
-    onComplete: () => {
-      ethnic.classList.add('none');
-      western.classList.remove('none');
-      // Then fade in ethnic
-      gsap.fromTo(western, 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
-      );
-    }
-  });
-});
-prevwestern.addEventListener('click', () => {
-
-  gsap.to(western, {
-    opacity: 0,
-    duration: 0.5,
-    ease: "power2.out",
-    onComplete: () => {
-      western.classList.add('none');
-      casual.classList.remove('none');
-      // Then fade in ethnic
-      gsap.fromTo(casual, 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
-      );
-    }
-  });
-});
-
-
-
-
-
-
-
-
-nextcasual.addEventListener('click', () => {
-
-  gsap.to(casual, {
-    opacity: 0,
-    duration: 0.5,
-    ease: "power2.out",
-    onComplete: () => {
-      casual.classList.add('none');
-      western.classList.remove('none');
-      // Then fade in ethnic
-      gsap.fromTo(western, 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
-      );
-    }
-  });
-});
-nextethnic.addEventListener('click', () => {
-
-  gsap.to(ethnic, {
-    opacity: 0,
-    duration: 0.5,
-    ease: "power2.out",
-    onComplete: () => {
-      ethnic.classList.add('none');
-      casual.classList.remove('none');
-      // Then fade in ethnic
-      gsap.fromTo(casual, 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
-      );
-    }
-  });
-});
-nextwestern.addEventListener('click', () => {
-
-  gsap.to(western, {
-    opacity: 0,
-    duration: 0.5,
-    ease: "power2.out",
-    onComplete: () => {
-      western.classList.add('none');
-      ethnic.classList.remove('none');
-      // Then fade in ethnic
-      gsap.fromTo(ethnic, 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 0.5, ease: "power2.inOut" }
-      );
-    }
-  });
-});
-
-document.querySelectorAll('.faq-item').forEach(item => {
-      item.addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
-
+  try {
+    await addDoc(collection(db,"clients","client1", "bookings"), bookingData);
+    alert("Booking saved successfully!Please notify us via WhatsApp.");
+    statusMsg.textContent = "✅ Booking Confirmed! Please notify us via WhatsApp.";
+    statusMsg.classList.remove("hidden", "text-red");
+    statusMsg.classList.add("text-green");
     
+    checkBtn.classList.add("hidden");
+    submitBtn.classList.remove("hidden");
+  } catch (err) {
+    alert("Error saving booking:", err);
+    statusMsg.textContent = "❌ Error saving booking!";
+    statusMsg.classList.remove("hidden", "text-green");
+    statusMsg.classList.add("text-red");
+    
+  }
+});
 
+
+submitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const name = nameInput.value.trim();
+  const category = categoryInput.value.trim();
+  const material = materialInput.value.trim();
+  const color = colorInput.value.trim();
+  const size = sizeInput.value.trim();
+  const productDetails = productDetailsInput.value.trim();
+  const status = "in progress"; // default
+
+  const message = `
+Hello Aharrv,
+I am ${name} and I have provided the details for my booking.
+
+Please give a confirmation.
+`;
+
+  const encodedMessage = encodeURIComponent(message.trim());
+
+  // Hardcoded admin number with country code
+  const adminPhoneNumber = "919557699153";
+  const whatsappURL = `https://wa.me/${adminPhoneNumber}?text=${encodedMessage}`;
+
+  window.open(whatsappURL, '_blank');
+
+  form.reset();
+});
+
+
+// Get elements
+
+
+
+
+form.addEventListener("submit", (e) => {
+   e.preventDefault(); // Prevent actual form submission
+
+   // Hide availability and show success
+   availabilityMsg.classList.add("hidden");e
+   statusMsg.classList.remove("hidden");
+
+   // You could also reset form fields here if needed:
+    form.reset();
+ });
+
+rentBtn.addEventListener("click", () => {
+  commonForm.classList.add("hidden");
+  rentForm.classList.remove("hidden");
+  
+
+})
+
+
+const tl = gsap.timeline();
+const link=document.querySelector(".link");
+
+//animations
+gsap.from(".clip-top,.clip-bottom",2,{
+    delay:1,
+    height:"50vh",
+    ease:"power4.inOut"
+})
+gsap.to(".marque",3.5,{
+    delay:0.75,
+    top:"50%",
+    ease:"power4.inOut"
+})
+gsap.from(".clip-top .marque,.clip-bottom .marque",5,{
+    delay:1,
+    left:"100%",
+    ease:"power3.inOut"
+})
+gsap.from(".clip-center .marque",5,{
+    delay:1,
+    left:"-50%",
+    
+    ease:"power3.inOut"
+})
+//
+gsap.to(".clip-center",3,{
+    delay:5,
+    opacity:0,
+    left:"-100%",
+    ease:"power4.inOut"
+})
+gsap.to(".clip-top",2,{
+    delay:6,
+    clipPath:"inset(0 0 100% 0)",
+    ease:"power4.inOut"
+})
+gsap.to(".clip-bottom",2,{
+    delay:6,
+    clipPath:"inset(100% 0 0 0)",
+    ease:"power4.inOut"
+})
+gsap.to(".clip-top .marque,.clip-bottom .marque,.clip-center .marque span",1,{
+    delay:6,
+    opacity:0,
+    ease:"power2.inOut"
+})
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const bookButtons = document.querySelectorAll(".item-card .btn");
+  const categorySelect = document.getElementById("category");
+  const productDetailsInput = document.getElementById("details");
+  const materialField = document.querySelector(".material");
+  const colorField = document.querySelector(".color");
+  const rentField = document.querySelector(".rent");
 
-    bookButtons.forEach((button) => {
-      const label = button.innerText.trim().toLowerCase();
+  const savedType = localStorage.getItem("selectedType");
+  const savedProductNo = localStorage.getItem("selectedProductNo");
 
-      if (label === "book") {
-        button.addEventListener("click", () => {
-          const itemCard = button.closest(".item-card");
-          const type = itemCard.querySelector(".type")?.innerText?.trim();
-          const productNo = itemCard.querySelector(".product-no")?.innerText?.trim();
+  if (savedType && categorySelect) {
+    categorySelect.value = savedType;
+    localStorage.removeItem("selectedType");
+  }
 
-          if (type) localStorage.setItem("selectedType", type);
-          if (productNo) localStorage.setItem("selectedProductNo", productNo);
 
-          window.location.href = "booking.html";
-        });
-      }
-    });
-  });
+
+  if (savedProductNo && productDetailsInput) {
+    productDetailsInput.value = `Product No. ${savedProductNo}`;
+    productDetailsInput.classList.remove("hidden"); // Remove hidden from #details
+
+    if (materialField) {
+      materialField.classList.add("hidden"); // Add hidden to .material
+    }
+    if (colorField) {
+      colorField.classList.add("hidden"); // Add hidden to .color
+    }
+    if (rentField) {
+      rentField.classList.add("hidden"); // Add hidden to .rent
+    }
+    
+    localStorage.removeItem("selectedProductNo");
+
+  }
+});
+
+
