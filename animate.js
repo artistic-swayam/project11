@@ -10,7 +10,12 @@
 //     toggleActions: "play reverse play reverse",             // for debugging
 //   }
 // });
-
+const lenis = new Lenis({})
+function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+}
+requestAnimationFrame(raf)
 gsap.registerPlugin(SplitText) 
 let split = SplitText.create(".split", {
   type: "words, lines", 
@@ -115,15 +120,15 @@ const container = document.getElementById('choose-hero');
 
   // Desktop (screens wider than 768px)
   "(min-width: 769px)": function() {
-    gsap.to(".img", {
-      scale: 0.25,
-      scrollTrigger: {
-        start: "top -10%",
-        end: "top -50%",
-        scrub: true,
-        pin: true,
-      }
-    }),
+    // gsap.to(".img", {
+    //   scale: 0.25,
+    //   scrollTrigger: {
+    //     start: "top -10%",
+    //     end: "top -50%",
+    //     scrub: true,
+    //     pin: true,
+    //   }
+    // }),
   gsap.to(letters, {
     scrollTrigger: {
       trigger: container,         // Correct element
@@ -142,14 +147,14 @@ const container = document.getElementById('choose-hero');
 
   // Mobile (screens 768px and below)
   "(max-width: 768px)": function() {
-    gsap.to(".img", {
-      scale: 0.25,
-      scrollTrigger: {
-        start: "top 0%",
-        end: "top -10%",
-        scrub: true,
-      }
-    }),
+    // gsap.to(".img", {
+    //   scale: 0.25,
+    //   scrollTrigger: {
+    //     start: "top 0%",
+    //     end: "top -10%",
+    //     scrub: true,
+    //   }
+    // }),
   gsap.to(letters, {
     scrollTrigger: {
       trigger: container,         // Correct element
